@@ -1,0 +1,75 @@
+<div class="page-content" ng-controller="UserCtrl">
+    <div class="page-header">
+        <h1>
+            添加
+            <small>
+                <i class="icon-double-angle-right"></i>
+                填写用户基本信息
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+            <form class="form-horizontal" name="adminForm" ng-submit="create()" role="form">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" >登录名</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input class="col-xs-6 col-sm-4" id="userName" name="userName" ng-model="userName" type="text" maxlength="15" value="" />
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" >密码</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="password" id="password" name="password" class="col-xs-6 col-sm-3" ng-model="password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" >用户类型</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="radio">
+                            <label>
+                                <input name="role" type="radio" class="ace" ng-model="roles" value="admin" checked />
+                                <span class="lbl"> 管理员 </span>
+                            </label>
+                            <label>
+                                <input name="role" type="radio" class="ace" ng-model="roles" value="user" />
+                                <span class="lbl"> 普通用户 </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" >用户昵称</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input class="col-xs-6 col-sm-4" id="displayName" name="displayName" ng-model="displayName" type="text" maxlength="15" value="" />
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" >手机号码</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input class="col-xs-6 col-sm-4" id="mobile" name="mobile" ng-model="mobile" type="mobile" maxlength="11" value="" />
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            确定
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <a class="btn" ui-sref="user.list">
+                            <i class="icon-undo bigger-110"></i>
+                            返回
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

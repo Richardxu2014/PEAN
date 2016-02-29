@@ -1,0 +1,47 @@
+<div class="navbar-container" id="navbar-container" ng-controller="HeaderCtrl">
+    <div class="navbar-header pull-left">
+        <b class="navbar-brand">
+            <small>
+                {{authentication.user.mobile}}
+            </small>
+        </b>
+    </div>
+
+    <div class="navbar-header pull-right" role="navigation">
+        <ul class="nav ace-nav">
+            <li class="light-blue">
+                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                    <img class="nav-user-photo" src="lib/images/user.jpg" alt="Jason's Photo" id="user" />
+                <span class="user-info">
+                <small>欢迎登录,</small>
+                    {{authentication.user.displayName}}
+                </span>
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                    <li>
+                        <a href="#modal-form" role="button" data-toggle="modal">
+                            <i class="icon-cog"></i>
+                            修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modal-profile" role="button" data-toggle="modal">
+                            <i class="icon-user"></i>
+                            用户信息
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="/user/logout">
+                            <i class="icon-off"></i>
+                            退出
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

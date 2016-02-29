@@ -1,0 +1,31 @@
+{
+  "name": "scData",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "bower": "^1.7.2",
+    "consolidate": "^0.13.1",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "glob": "^5.0.15",
+    "helmet": "~0.9.1",
+    "jsonwebtoken": "^5.5.4",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.3.4",
+    "morgan": "~1.6.1",
+    "swig": "^1.4.2",
+    "validator": "^4.8.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-nodemon": "^2.0.4",
+    "require-dir": "^0.3.0"
+  }
+}
