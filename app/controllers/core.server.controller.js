@@ -8,7 +8,6 @@ exports.layout = function(req, res) {
 };
 
 exports.login = function(req, res) {
-    console.log('asdfasdfasdfasdfasdfasdf');
     res.render('login', { });
 };
 

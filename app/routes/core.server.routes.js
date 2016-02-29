@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function(app, authorize) {
     // Root routing
     var core = require('../../app/controllers/core');
     // Define error pages
@@ -8,5 +8,5 @@ module.exports = function(app) {
 
     app.route('/login').get(core.login);
 
-    app.route('/').get(core.layout);
+    app.route('/').get(authorize, core.layout);
 };

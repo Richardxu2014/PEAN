@@ -14,9 +14,6 @@ module.exports = function(app) {
     // Finish by binding the user middleware
     app.param('userID', user.userByID);
 
-
-    // app.route('/api/signUp').get(user.signUp);
-
     app.route('/api/authenticate').post(user.signIn);
 
 };

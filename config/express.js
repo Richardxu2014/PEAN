@@ -62,38 +62,40 @@ module.exports = function(){
         next();
     });
 
-    var ensureAuthorized = function(req, res, next) {
+
+    var authorize = function(req, res, next) {
         var bearerToken;
+        console.log('111111111111111111111111111111111111111111111');
+        console.log(req.headers["authorization"]);
         var bearerHeader = req.headers["authorization"];
         if (typeof bearerHeader !== 'undefined') {
+            console.log('bbbbcccccc cccccc');
             var bearer = bearerHeader.split(" ");
             bearerToken = bearer[1];
             req.token = bearerToken;
             console.log(bearerToken);
-
-            jwt.verify(bearerToken, '51liuliang', function(err, decoded) {
+            jwt.verify(bearerToken, config.jwtTokenSecret, function(err, decoded) {
                 if (err) {
-                    /*
-                      err = {
-                        name: 'JsonWebTokenError',
-                        message: 'jwt malformed'
-                      }
-                    */
+
+                    console.log('登录状态异常：' + err);
+                    res.redirect("/login");
                 } else {
-                    console.log('============================================')
+                    console.log('=========================');
                     console.log(decoded);
-                    console.log('============================================')
+                    console.log('=========================');
+
                     next();
-                }            
+                }
             });
         } else {
-            res.send(403);
+            console.log('请先登录！');
+            res.redirect("/login");
         }
     };
 
     // Globbing routing files
     config.getGlobbedFiles('./app/routes/*.js').forEach(function(routePath) {
-        require(path.resolve(routePath))(app);
+        require(path.resolve(routePath))(app, authorize);
     });
 
 
