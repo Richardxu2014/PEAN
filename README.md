@@ -4,5 +4,5 @@
 ## 安装 mongodb
 ## 安装 node.js V5.2.0 以及express V4.13.1
 ## 运行项目
-### npm install
-### gulp
+### npm install 
+### node server.js
