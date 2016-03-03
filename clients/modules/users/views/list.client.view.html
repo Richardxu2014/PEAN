@@ -53,13 +53,9 @@
                                     <td ng-bind="user.created"> </td>
                                     <td>
                                         <div class="visible-md visible-lg btn-group">
-                                            <a class="btn btn-xs btn-info" data-rel="tooltip" title="修改" 
-                                            ui-sref="user.view({userId: user._id})">
+                                            <a class="btn btn-xs btn-info" data-rel="tooltip" title="修改" ui-sref="user.view({userId: user._id})">
                                                 <i class="icon-edit bigger-120"></i>
                                             </a>
-                                            <button class="btn btn-xs btn-danger"  data-rel="tooltip" title="删除" onclick="deleteRecord()">
-                                                <i class="icon-trash bigger-120"></i>
-                                            </button>
                                             <a class="btn btn-xs btn-warning" ui-sref="user.view({userId: user._id})" data-rel="tooltip" title="重置密码" >
                                                 <i class="icon-exchange bigger-120"></i>
                                             </a>
@@ -76,30 +72,6 @@
     </div><!-- /.row -->
 </div><!-- /.page-content -->
 
-<script type="text/javascript">
-
-//    jQuery(function($) {
-//        $('#sample-table-1').dataTable( {
-//            "aoColumns": [ null,null,null,null,null,null,null, { "bSortable": false }, { "bSortable": false } ],
-//            "oLanguage": {
-//                "sLengthMenu": '显示 <select>'+
-//                '<option value="10">10</option>'+
-//                '<option value="20">20</option>'+
-//                '<option value="30">50</option>'+
-//                '<option value="-1">All</option>'+
-//                '</select> 条记录',
-//                "sLoadingRecords": "正在为您准备数据...",
-//                "sEmptyTable": "表中没有可用的记录",
-//                "sZeroRecords": "没有符合条件的记录",
-//                "sSearch": "查询",
-//                "sInfoFiltered": " - 检索了 _MAX_ 条记录",
-//                "sInfoEmpty": "",
-//                "sInfo": "共 _TOTAL_ 条记录 (_START_ 到 _END_)"
-//            }
-//        } );
-//    })
-
-</script>
 
 
 

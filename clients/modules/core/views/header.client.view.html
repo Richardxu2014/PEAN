@@ -1,20 +1,20 @@
 <div class="navbar-container" id="navbar-container" ng-controller="HeaderCtrl">
     <div class="navbar-header pull-left">
-        <b class="navbar-brand">
-            <small>
-                {{authentication.user.mobile}}
-            </small>
-        </b>
+        <a ui-sref="home">
+            <b class="navbar-brand">
+                <small>{{user.company}}</small>
+            </b>
+        </a>
     </div>
 
     <div class="navbar-header pull-right" role="navigation">
         <ul class="nav ace-nav">
             <li class="light-blue">
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                    <img class="nav-user-photo" src="lib/images/user.jpg" alt="Jason's Photo" id="user" />
+                    <img class="nav-user-photo" src="/lib/images/user.jpg" alt="Jason's Photo" id="user" />
                 <span class="user-info">
                 <small>欢迎登录,</small>
-                    {{authentication.user.displayName}}
+                    {{user.displayName}}
                 </span>
                     <i class="icon-caret-down"></i>
                 </a>
@@ -35,7 +35,7 @@
                     <li class="divider"></li>
 
                     <li>
-                        <a href="/user/logout">
+                        <a href="" ng-click="logout()">
                             <i class="icon-off"></i>
                             退出
                         </a>

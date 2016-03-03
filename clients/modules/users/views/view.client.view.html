@@ -1,8 +1,10 @@
 <div class="page-content" ng-controller="UserCtrl" ng-init="findOne()">
     <div class="page-header">
         <h1>
-            详情
+            用户详情
             <small class="pull-right">
+
+                <button class="btn btn-sm btn-danger" ng-click="remove()" >删除</button>
                 <a class="btn btn-sm btn-info" ui-sref="user">编辑</a>
                 <a class="btn btn-sm btn-default" ui-sref="user.list">返回</a>
             </small>
@@ -55,5 +57,7 @@
                 </div>
             </div><!-- /.row -->
         </div>
-    </div>
+
+    </div><!-- /.row -->
+
 </div><!-- /.page-content -->

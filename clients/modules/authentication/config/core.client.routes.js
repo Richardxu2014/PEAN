@@ -6,11 +6,7 @@ angular.module('authentication').config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('login',{
                 url: '/',
-                templateUrl: 'modules/authentication/views/login.client.view.html',
-                controller: 'AuthenticationCtrl'
-            })
-            .state('logout',{
-                url: '/logout',
+                templateUrl: '/modules/authentication/views/login.client.view.html',
                 controller: 'AuthenticationCtrl'
             });
     }]);

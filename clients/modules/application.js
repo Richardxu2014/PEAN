@@ -1,9 +1,8 @@
 'use strict';
 
-// Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
     // Init module configuration options
-    var applicationModuleName = 'test';
+    var applicationModuleName = '51liuliang';
     var applicationModuleVendorDependencies = ['ngResource', 'ui.router', 'ngStorage'];
 
     // Add a new vertical module

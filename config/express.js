@@ -63,50 +63,68 @@ module.exports = function(){
     });
 
 
-    var authorize = function(req, res, next) {
-        var bearerToken;
-        console.log('111111111111111111111111111111111111111111111');
-        console.log(req.headers["authorization"]);
-        var bearerHeader = req.headers["authorization"];
-        if (typeof bearerHeader !== 'undefined') {
-            console.log('bbbbcccccc cccccc');
-            var bearer = bearerHeader.split(" ");
-            bearerToken = bearer[1];
-            req.token = bearerToken;
-            console.log(bearerToken);
-            jwt.verify(bearerToken, config.jwtTokenSecret, function(err, decoded) {
-                if (err) {
+    //var authorize = function(req, res, next) {
+    //    var bearerToken;
+    //    console.log('111111111111111111111111111111111111111111111');
+    //    console.log(req.headers["authorization"]);
+    //    var bearerHeader = req.headers["authorization"];
+    //    if (typeof bearerHeader !== 'undefined') {
+    //        console.log('bbbbcccccc cccccc');
+    //        var bearer = bearerHeader.split(" ");
+    //        bearerToken = bearer[1];
+    //        req.token = bearerToken;
+    //        console.log(bearerToken);
+    //        jwt.verify(bearerToken, config.jwtTokenSecret, function(err, decoded) {
+    //            if (err) {
+    //
+    //                console.log('登录状态异常：' + err);
+    //                res.redirect("/login");
+    //            } else {
+    //                console.log('=========================');
+    //                console.log(decoded);
+    //                console.log('=========================');
+    //                next();
+    //            }
+    //        });
+    //    } else {
+    //        console.log('请先登录！');
+    //        res.sendStatus(401);
+    //    }
+    //};
 
-                    console.log('登录状态异常：' + err);
-                    res.redirect("/login");
-                } else {
-                    console.log('=========================');
-                    console.log(decoded);
-                    console.log('=========================');
 
-                    next();
-                }
-            });
-        } else {
-            console.log('请先登录！');
-            res.redirect("/login");
+    app.use(function (req, res, next) {
+        if(req.path.indexOf('/api')>=0){
+            var bearerToken;
+            var bearerHeader = req.headers["authorization"];
+            if (typeof bearerHeader !== 'undefined') {
+                var bearer = bearerHeader.split(" ");
+                bearerToken = bearer[1];
+                req.token = bearerToken;
+                jwt.verify(bearerToken, config.jwtTokenSecret, function(err, decoded) {
+                    if (err) {
+                        console.log('登录状态异常：' + err);
+                        res.sendStatus(401);
+                    } else {
+                        console.log('=========================');
+                        console.log(decoded);
+                        console.log('=========================');
+                        next();
+                    }
+                });
+            } else {
+                console.log('请先登录！');
+                res.sendStatus(401);
+            }
+        }else{
+            next();
         }
-    };
+    });
 
     // Globbing routing files
     config.getGlobbedFiles('./app/routes/*.js').forEach(function(routePath) {
-        require(path.resolve(routePath))(app, authorize);
+        require(path.resolve(routePath))(app);
     });
-
-
-    // app.use(function (req, res, next) {
-    //    if(req.path.indexOf('/api')>=0){
-    //       next();
-    //    }else{ //angular启动页
-    //        //res.send("aaaaaa");
-    //        res.redirect("/");
-    //    }
-    // });
 
     
     // Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.

@@ -1,8 +1,8 @@
 'use strict';
 
 // user controller
-angular.module('user').controller('UserCtrl', ['$scope', '$stateParams', '$location',  'User',
-  function ($scope, $stateParams, $location, User) {
+angular.module('user').controller('UserCtrl', ['$scope', '$stateParams', '$location',  'User', '$q',
+  function ($scope, $stateParams, $location, User, $q) {
 
     $scope.create = function () {
       var user = new User({

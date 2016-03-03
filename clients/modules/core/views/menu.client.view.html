@@ -1,15 +1,11 @@
-<ul class="nav nav-list">
-    <li>
-        <a ui-sref="user.list">
-            <i class="icon-group"></i>
-            <span class="menu-text"> 用户管理 </span>
-        </a>
-    </li>
-    <li>
-        <a ui-sref="user.list">
-            <i class="icon-calendar"></i>
-            <span class="menu-text"> 工作人员管理 </span>
-        </a>
-    </li>
-    
-</ul>
+<div ng-controller="MenuCtrl">
+    <ul class="nav nav-list" ng-repeat="menu in menus">
+        <li>
+            <a ui-sref="{{menu.state}}">
+                <i class="{{menu.iconClass}}"></i>
+                <span class="menu-text"> {{menu.title}} </span>
+            </a>
+
+        </li>
+    </ul>
+</div>

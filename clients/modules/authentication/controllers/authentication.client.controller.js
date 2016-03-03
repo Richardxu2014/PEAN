@@ -11,26 +11,18 @@ angular.module('authentication').controller('AuthenticationCtrl', ['$scope', '$s
     };
 
     $scope.signin = function () {
-      $http.post('/api/authenticate', $scope.credentials).success(function (response) {
-        //$scope.authentication.user = response;
+      $http.post('/authenticate', $scope.credentials).success(function (response) {
           console.log(response);
-
-
           if(response.type){
-              $scope.authentication.user = response.user;
+              $localStorage.user = response.user;
               $localStorage.token = response.token;
               $window.location.href = '/';
           }else{
               $scope.error = response.data;
           }
-
-        // And redirect to the previous or home page
-        //$state.go($state.previous.state.name || 'admin.list', $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
       });
-
-
     };
 
     // OAuth provider request
