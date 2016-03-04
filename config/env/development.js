@@ -22,6 +22,9 @@ module.exports = {
     app: {
         title: '[Development]七彩51流量'
     },
+    wechat:{
+        token: 'luliangdevtest'
+    },
     assets: {
         css: [
             'clients/modules/**/css/*.css'

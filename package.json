@@ -20,7 +20,8 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.19.3",
     "swig": "^1.4.2",
-    "validator": "^4.8.0"
+    "validator": "^4.8.0",
+    "wechat-api": "^1.25.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
