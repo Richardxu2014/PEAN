@@ -6,13 +6,18 @@
 
 module.exports = {
     db: {
-        uri: 'mongodb://localhost/scdata',
+        database: 'scdata',
+        username: 'xulq',
+        password: '321`',
         options: {
-            user: '',
-            pass: ''
-        },
-        // Enable mongoose debug mode
-        debug: process.env.MONGODB_DEBUG || false
+            host: 'localhost',
+            dialect: 'postgres',
+            pool: {
+                max: 5,
+                min: 0,
+                idle: 10000
+            }
+        }
     },
     app: {
         title: '[Development]七彩51流量'

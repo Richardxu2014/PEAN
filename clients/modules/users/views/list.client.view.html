@@ -48,12 +48,12 @@
                                 <tr ng-repeat="user in users">
                                     <td ng-bind="user.userName"> </td>
                                     <td ng-bind="user.displayName"> </td>
-                                    <td ng-bind="user.roles"> </td>
+                                    <td ng-bind="user.role"> </td>
                                     <td ng-bind="user.mobile"> </td>
-                                    <td ng-bind="user.created"> </td>
+                                    <td ng-bind="user.createdAt"> </td>
                                     <td>
                                         <div class="visible-md visible-lg btn-group">
-                                            <a class="btn btn-xs btn-info" data-rel="tooltip" title="修改" ui-sref="user.view({userId: user._id})">
+                                            <a class="btn btn-xs btn-info" data-rel="tooltip" title="修改" ui-sref="user.view({userId: user.id})">
                                                 <i class="icon-edit bigger-120"></i>
                                             </a>
                                             <a class="btn btn-xs btn-warning" ui-sref="user.view({userId: user._id})" data-rel="tooltip" title="重置密码" >

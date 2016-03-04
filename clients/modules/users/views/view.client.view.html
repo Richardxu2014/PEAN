@@ -4,7 +4,7 @@
             用户详情
             <small class="pull-right">
 
-                <button class="btn btn-sm btn-danger" ng-click="remove()" >删除</button>
+                <button class="btn btn-sm btn-danger" ng-click="remove(user.id)" >删除</button>
                 <a class="btn btn-sm btn-info" ui-sref="user">编辑</a>
                 <a class="btn btn-sm btn-default" ui-sref="user.list">返回</a>
             </small>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" >角色</label>
                     <div class="col-xs-12 col-sm-9">
-                        <p  ng-bind="user.roles"></p>
+                        <p  ng-bind="user.role"></p>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" >创建时间</label>
                     <div class="col-xs-12 col-sm-9">
-                        <p ng-bind="user.created"></p>
+                        <p ng-bind="user.createdAt"></p>
                     </div>
                 </div>
             </div><!-- /.row -->

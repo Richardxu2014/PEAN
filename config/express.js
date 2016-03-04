@@ -10,16 +10,11 @@ var express      = require('express'),
     jwt          = require("jsonwebtoken"),
     helmet       = require('helmet'),
     consolidate  = require('consolidate');
-
     global.config = require('./config');
+
 module.exports = function(){
     // Initialize express app
     var app = express();
-
-    // Globbing model files
-    config.getGlobbedFiles('./app/models/*.js').forEach(function(modelPath) {
-        require(path.resolve(modelPath));
-    });
 
     // Setting application local variables
     app.locals.title = config.app.title;
@@ -106,9 +101,7 @@ module.exports = function(){
                         console.log('登录状态异常：' + err);
                         res.sendStatus(401);
                     } else {
-                        console.log('=========================');
                         console.log(decoded);
-                        console.log('=========================');
                         next();
                     }
                 });

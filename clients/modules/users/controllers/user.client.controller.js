@@ -1,41 +1,33 @@
 'use strict';
 
 // user controller
-angular.module('user').controller('UserCtrl', ['$scope', '$stateParams', '$location',  'User', '$q',
-  function ($scope, $stateParams, $location, User, $q) {
-
+angular.module('user').controller('UserCtrl', ['$scope', '$stateParams', '$location',  'User',
+  function ($scope, $stateParams, $location, User) {
+    $scope.role = 'admin';
     $scope.create = function () {
       var user = new User({
         userName:    this.userName,
         displayName: this.displayName,
         password:    this.password,
-        roles:       this.roles,
+        role:        this.role,
         mobile:      this.mobile
       });
-        console.log(user);
       user.$save(function (response) {
-        $location.path('user/' + response._id);
+        $location.path('user/' + response.id);
       }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
+        $scope.errors = errorResponse.data;
       });
     };
 
-    $scope.remove = function (user) {
-      if (user) {
-        user.$remove();
-        for (var i in $scope.user) {
-          if ($scope.user[i] === user) {
-            $scope.user.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.user.$remove(function () {
-          $location.path('user');
-        });
+    $scope.remove = function (id) {
+      if (id) {
+          User.delete({userId: id},function(){
+              $location.path('user');
+          })
       }
     };
 
-    $scope.update = function (isValid) {
+    $scope.update = function () {
       $scope.error = null;
       var user = $scope.user;
       user.$update(function () {

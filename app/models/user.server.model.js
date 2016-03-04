@@ -3,92 +3,87 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    crypto = require('crypto'),
-    validator = require('validator');
+var Sequelize = require('sequelize'),
+    sequelize = require('../../config/database'),
+    crypto = require('crypto');
 
-//验证号码长度大于6位
-var validatePassword = function(password) {
-    return (password && password.length > 5);
-};
-
-var validateMobile = function (mobile) {
-  return validator.isMobilePhone(mobile, 'zh-CN');
-};
-
-/**
- * User Schema
- */
-var UserSchema = new Schema({
-    userName: {
-        type: String,
-        unique: true,
-        required: '请填写用户名',
-        trim: true
-    },
-    displayName: {
-        type: String,
-        required: '请填写用户昵称',
-        trim: true
-    },
-    password: {
-        type: String,
-        default: '',
-        validate: [validatePassword, '密码太短，必须是六位以上']
-    },
-    mobile: {
-        type: String,
-        default: '',
-        validate: [validateMobile, '手机号码格式不正确']
-    },
-    salt: {
-        type: String
-    },
-    roles: {
-        type: [{
-          type: String,
-          enum: ['user', 'admin']
-        }],
-        default: ['user']
-    },
-    updated: {
-        type: Date,
-        default: Date.now
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-/**
- * Hook a pre save method to hash the password
- */
-UserSchema.pre('save', function(next) {
-    if (this.password && this.password.length > 1) {
-        this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-        this.password = this.hashPassword(this.password);
-    }
-    next();
-});
-
-/*
- * Create instance method for hashing a password
- */
-UserSchema.methods.hashPassword = function(password) {
-    if (this.salt && password) {
-        return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+var hashPassword = function(salt, password) {
+    if (salt && password) {
+        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
     } else {
         return password;
     }
 };
 
-/**
- * Create instance method for authenticating user
- */
-UserSchema.methods.authenticate = function(password) {
-    return this.password === this.hashPassword(password);
-};
+module.exports = sequelize.define('user', {
+    userName: {
+        type: Sequelize.STRING,
+        field: 'user_name',
+        unique: true,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "用户名不能为空"
+            }
+        }
+    },
+    displayName: {
+        type: Sequelize.STRING,
+        field: 'display_name',
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "用户昵称不能为空"
+            }
+        }
+    },
+    password: {
+        type: Sequelize.STRING,
+        default: '',
+        validate: {
+            len: {
+                args: [6,20],
+                msg: "密码必须为6到20位的字母或数字"
+            }
+        }
+    },
+    mobile: {
+        type: Sequelize.STRING,
+        default: '',
+        validate: {
+            is :{
+                args:/^1[345678]{1}\d{9}$/ , //
+                msg: '手机号码格式不正确'
+            }
+        }
+    },
+    role: {
+        type: Sequelize.STRING,
+        default: 'user' // [user,  admin]
+    },
+    source:{
+        type: Sequelize.STRING,
+        default: '管理员添加'
+    },
+    salt: {
+        type: Sequelize.STRING
+    }
 
-mongoose.model('User', UserSchema);
+}, {
+    freezeTableName: true,
+    timestamps: true,
+    hooks:{
+        beforeCreate: function(user){
+            if (user.password.length > 1) {
+                var salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+                user.salt = salt.toString();
+                user.password = hashPassword(user.salt, user.password);
+            }
+        }
+    },
+    instanceMethods: {
+        authenticate: function (password) {
+            return this.password === hashPassword(this.salt, password)
+        }
+    }
+});

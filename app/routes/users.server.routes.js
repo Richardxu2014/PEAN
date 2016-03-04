@@ -15,5 +15,5 @@ module.exports = function(app) {
     app.param('userID', user.userByID);
 
     app.route('/authenticate').post(user.signIn);
-
+    app.route('/table_create/user').get(user.createTable)
 };

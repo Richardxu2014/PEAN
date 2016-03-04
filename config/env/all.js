@@ -31,16 +31,6 @@ module.exports = {
                 'clients/lib/ace/jquery.dataTables.bootstrap'
             ]
         },
-        // css: [
-        //     'clients/modules/**/css/*.css'
-        // ],
-        // js: [
-        //     'clients/modules/application.js',
-        //     'clients/modules/config.js',
-        //     'clients/modules/register.js',
-        //     'clients/modules/*/*.js',
-        //     'clients/modules/*/*/*.js'
-        // ],
         tests: [
            
         ]
