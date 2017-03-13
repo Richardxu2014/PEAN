@@ -20,7 +20,7 @@ module.exports = {
         }
     },
     app: {
-        title: '[Development]七彩51流量'
+        title: '[Development]测试平台'
     },
     wechat:{
         token: 'luliangdevtest'
